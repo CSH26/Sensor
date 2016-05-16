@@ -45,10 +45,12 @@ public class SensorDataActivity extends AppCompatActivity implements SensorEvent
         }
     }
 
+    //센서의 데이터 값이 변할 때 화면에 표시
     public void onSensorChanged(SensorEvent event){
-        String data = "Sensor Timestamp: "+event.timestamp+"\n\n";
+        String data = "Sensor Timestamp: "+event.timestamp+"\n\n"; //timestamp는 센서에서 값을 학인한 시간
 
-        for(int index = 0; index < event.values.length; ++index){
+        for(int index = 0; index < event.values.length; ++index){   // value는 float타입의 배열로, 센서의 종류에 따라 여러개의 값을 가진다.
+            // ex)방향 센서의 경우 value배열의 크기 3
             data += ("Sensor Value #" + (index +1) +": "+event.values[index]+"\n");
         }
         txtSensorValues.setText(data);
@@ -68,7 +70,7 @@ public class SensorDataActivity extends AppCompatActivity implements SensorEvent
         manager.registerListener(this, sensorList.get(sensorIndex), SensorManager.SENSOR_DELAY_UI);
     }
 
-
+    // 센서정확도가 변할 때 화면에 표시
     public void onAccuracyChanged(Sensor sensor, int accuracy){
         txtSensorAccuracy.setText("Sensor Accuracy : "+getSensorAccuracyAsString(accuracy));
     }
